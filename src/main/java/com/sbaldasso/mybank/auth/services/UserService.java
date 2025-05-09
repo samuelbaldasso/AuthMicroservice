@@ -17,7 +17,7 @@ public class UserService {
 
     private PasswordEncoder bCryptPasswordEncoder;
 
-    public User create(UserDTO userDTO){
+    public void create(UserDTO userDTO){
         User user = User.builder()
                 .name(userDTO.getName())
                 .email(userDTO.getEmail())
@@ -25,7 +25,7 @@ public class UserService {
                 .username(userDTO.getUsername())
                 .build();
 
-        return userRepository.save(user);
+        userRepository.save(user);
     }
 
     public User update(UserDTO userDTO, Long id){
