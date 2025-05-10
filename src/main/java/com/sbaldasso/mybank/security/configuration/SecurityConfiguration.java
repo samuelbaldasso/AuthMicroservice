@@ -22,6 +22,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableMethodSecurity
 public class SecurityConfiguration {
 
     private final JWTFilter jwtAuthFilter;
@@ -33,7 +34,8 @@ public class SecurityConfiguration {
                     .csrf(AbstractHttpConfigurer::disable)
                     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     .authorizeHttpRequests(authorize -> authorize
-                            .requestMatchers("/api/**").permitAll()
+                            .requestMatchers("/api/v1/auth/register").permitAll()
+                            .requestMatchers("/api/v1/auth/login").hasAnyRole("USER", "ADMIN")
                             .anyRequest().authenticated()
                     )
                     .cors(AbstractHttpConfigurer::disable)

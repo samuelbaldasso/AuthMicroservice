@@ -7,5 +7,4 @@ import lombok.Data;
 @Builder
 public class UserAuthDTO {
     private String token;
-    private String email;
 }

@@ -3,6 +3,7 @@ import com.sbaldasso.mybank.auth.dto.UserAuthDTO;
 import com.sbaldasso.mybank.auth.dto.UserDTO;
 import com.sbaldasso.mybank.auth.dto.UserLoginDTO;
 import com.sbaldasso.mybank.auth.entities.User;
+import com.sbaldasso.mybank.auth.enums.Role;
 import com.sbaldasso.mybank.auth.repositories.UserRepository;
 import com.sbaldasso.mybank.security.jwt.JWTTokenGenerator;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +12,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -24,13 +28,14 @@ public class AuthService {
     public UserAuthDTO register(UserDTO request) {
         var user = User.builder()
                 .username(request.getUsername())
+                .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
+                .roles(request.getRoles())
                 .build();
         userRepository.save(user);
         var jwtToken = jwtUtil.generateToken(user);
         return UserAuthDTO.builder()
                 .token(jwtToken)
-                .email(user.getEmail())
                 .build();
     }
 
@@ -46,7 +51,6 @@ public class AuthService {
         var jwtToken = jwtUtil.generateToken(user);
         return UserAuthDTO.builder()
                 .token(jwtToken)
-                .email(user.getEmail())
                 .build();
     }
 }
