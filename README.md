@@ -1,6 +1,6 @@
 # MyBankAuth
 
-Sistema de autenticação me utilizando de Spring Security 6 e Spring Boot 3, desenvolvido em Java com Maven.
+Sistema de autenticação e autorização para bancos MVP me utilizando de Spring Security 6 e Spring Boot 3, desenvolvido em Java com Maven.
 
 ## 🚀 Tecnologias Utilizadas
 
