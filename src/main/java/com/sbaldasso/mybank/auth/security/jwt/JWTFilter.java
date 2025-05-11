@@ -1,4 +1,4 @@
-package com.sbaldasso.mybank.security.jwt;
+package com.sbaldasso.mybank.auth.security.jwt;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;

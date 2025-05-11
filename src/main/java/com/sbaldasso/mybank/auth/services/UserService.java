@@ -6,6 +6,7 @@ import com.sbaldasso.mybank.auth.enums.Role;
 import com.sbaldasso.mybank.auth.exception.UserNotFoundException;
 import com.sbaldasso.mybank.auth.repositories.UserRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -18,18 +19,6 @@ public class UserService {
     private UserRepository userRepository;
 
     private PasswordEncoder bCryptPasswordEncoder;
-
-    public void create(UserDTO userDTO) {
-        User user = User.builder()
-                .name(userDTO.getName())
-                .email(userDTO.getEmail())
-                .password(bCryptPasswordEncoder.encode(userDTO.getPassword()))
-                .username(userDTO.getUsername())
-                .roles(userDTO.getRoles())
-                .build();
-
-        userRepository.save(user);
-    }
 
     public User update(UserDTO userDTO, Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
@@ -50,4 +39,11 @@ public class UserService {
     public void deleteById(Long id) {
         userRepository.deleteById(id);
     }
+
+    public User getCurrentUser() {
+        String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmail(currentUsername)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
 }
+

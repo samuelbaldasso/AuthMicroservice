@@ -1,11 +1,10 @@
-package com.sbaldasso.mybank.security.configuration;
+package com.sbaldasso.mybank.auth.security.configuration;
 
 import com.sbaldasso.mybank.auth.services.CustomUserDetailsService;
-import com.sbaldasso.mybank.security.jwt.JWTFilter;
+import com.sbaldasso.mybank.auth.security.jwt.JWTFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
