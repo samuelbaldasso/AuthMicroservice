@@ -1,4 +1,4 @@
-# MyBankAuth Microservice
+# Auth Microservice
 
 This project is the authentication and authorization microservice extracted from the MyBank modular app. It is built using Spring Boot 3 and Spring Security 6 with JWT token support.
 
@@ -30,6 +30,7 @@ MyBankAuthMicroservice/
 ├── Dockerfile
 ├── pom.xml
 └── README.md
+...
 ```
 
 ## ⚙️ How to Run
@@ -49,8 +50,8 @@ MyBankAuthMicroservice/
 3. Alternatively, build and run the Docker container:
 
    ```bash
-   docker build -t auth-microservice .
-   docker run -p 8081:8081 auth-microservice
+   docker build -t mybank .
+   docker run -p 8081:8081 mybank
    ```
 
 ## 🧪 Testing
