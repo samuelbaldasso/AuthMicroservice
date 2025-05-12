@@ -1,14 +1,13 @@
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jdk-slim
-
-# Set the working directory inside the container
+# Build stage
+FROM maven:3.8.6-eclipse-temurin-17 as builder
 WORKDIR /app
+COPY pom.xml .
+COPY src src
+RUN mvn clean package -DskipTests
 
-# Copy the project jar file into the container
-COPY target/auth-microservice.jar auth-microservice.jar
-
-# Expose the port the app runs on
+# Runtime stage
+FROM eclipse-temurin:17-jre-focal
+WORKDIR /app
+COPY --from=builder /app/target/mybank-0.0.1-SNAPSHOT.jar mybank.jar
 EXPOSE 8081
-
-# Run the jar file
-ENTRYPOINT ["java", "-jar", "auth-microservice.jar"]
+ENTRYPOINT ["java", "-jar", "mybank.jar"]
