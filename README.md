@@ -1,89 +1,66 @@
-# MyBankAuth
+# MyBankAuth Microservice
 
-Sistema de autenticação e autorização para bancos MVP me utilizando de Spring Security 6 e Spring Boot 3, desenvolvido em Java com Maven.
+This project is the authentication and authorization microservice extracted from the MyBank modular app. It is built using Spring Boot 3 and Spring Security 6 with JWT token support.
 
-## 🚀 Tecnologias Utilizadas
+## 🚀 Technologies Used
 
 * Java
 * Maven
-* Spring
+* Spring Boot
 * Spring Security
 * JWT Tokens
+* Docker
 
-## 📁 Estrutura do Projeto
+## 📁 Project Structure
 
-O projeto segue a estrutura padrão de aplicações Java com Maven:
+The project follows the standard Maven Java project structure:
 
 ```
-
-MyBankAuth/
-├── .mvn/
+MyBankAuthMicroservice/
 ├── src/
 │   ├── main/
 │   │   └── java/
 │   │       └── com/
-│   │           └── mybank/
-│   │               └── auth/
-│   │                   └── [classes Java]
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── mybank/
-│                   └── auth/
-│                       └── [testes]
-├── .gitignore
-├── mvnw
-├── mvnw.cmd
+│   │           └── sbaldasso/
+│   │               └── mybank/
+│   │                   └── authmicroservice/
+│   │                       └── [Java classes]
+│   └── resources/
+│       └── application.properties
+├── Dockerfile
 ├── pom.xml
 └── README.md
 ```
 
+## ⚙️ How to Run
 
-
-## ⚙️ Como Executar
-
-1. Clone o repositório:
-
-   ```bash
-   git clone https://github.com/samuelbaldasso/MyBankAuth.git
-   ```
-
-
-
-2. Navegue até o diretório do projeto:
-
-   ```bash
-   cd MyBankAuth
-   ```
-
-
-
-3. Compile o projeto:
+1. Build the project:
 
    ```bash
    ./mvnw clean install
    ```
 
-
-
-4. Execute a aplicação:
+2. Run the microservice:
 
    ```bash
    ./mvnw spring-boot:run
    ```
 
+3. Alternatively, build and run the Docker container:
 
+   ```bash
+   docker build -t auth-microservice .
+   docker run -p 8081:8081 auth-microservice
+   ```
 
-## 🧪 Testes
+## 🧪 Testing
 
-Para executar os testes automatizados:
+Run automated tests with:
 
 ```bash
 ./mvnw test
 ```
 
+## 📄 License
 
-
-## 📄 Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
+This project is licensed under the MIT License.
