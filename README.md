@@ -23,7 +23,7 @@ MyBankAuthMicroservice/
 │   │       └── com/
 │   │           └── sbaldasso/
 │   │               └── mybank/
-│   │                   └── authmicroservice/
+│   │                   └── auth/
 │   │                       └── [Java classes]
 │   └── resources/
 │       └── application.properties
@@ -50,7 +50,7 @@ MyBankAuthMicroservice/
 3. Alternatively, build and run the Docker container:
 
    ```bash
-   docker build -t mybank .
+   docker build -t mybank
    docker run -p 8081:8081 mybank
    ```
 
