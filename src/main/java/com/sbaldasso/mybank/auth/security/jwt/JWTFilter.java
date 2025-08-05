@@ -1,11 +1,13 @@
 package com.sbaldasso.mybank.auth.security.jwt;
 
+import com.sbaldasso.mybank.auth.services.CustomUserDetailsService;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,11 +20,15 @@ import java.io.IOException;
 
 @Component
 public class JWTFilter extends OncePerRequestFilter {
-    @Autowired
-    private UserDetailsService userDetailsService;
 
-    @Autowired
-    private JWTTokenGenerator jwtTokenUtil;
+    private final CustomUserDetailsService userDetailsService;
+
+    private final JWTTokenGenerator jwtTokenUtil;
+
+    public JWTFilter(@Qualifier("customUserDetailsService") CustomUserDetailsService userDetailsService, JWTTokenGenerator jwtTokenUtil) {
+        this.userDetailsService = userDetailsService;
+        this.jwtTokenUtil = jwtTokenUtil;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

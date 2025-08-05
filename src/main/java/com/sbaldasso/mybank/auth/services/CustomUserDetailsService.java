@@ -4,6 +4,7 @@ import com.sbaldasso.mybank.auth.entities.User;
 import com.sbaldasso.mybank.auth.exception.UserNotFoundException;
 import com.sbaldasso.mybank.auth.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -13,7 +14,8 @@ import org.springframework.stereotype.Service;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@Service
+@Service("customUserDetailsService")
+@Primary
 public class CustomUserDetailsService implements UserDetailsService {
 
     @Autowired

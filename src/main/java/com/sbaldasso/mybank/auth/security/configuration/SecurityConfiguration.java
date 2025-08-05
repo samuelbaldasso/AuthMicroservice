@@ -3,6 +3,7 @@ package com.sbaldasso.mybank.auth.security.configuration;
 import com.sbaldasso.mybank.auth.services.CustomUserDetailsService;
 import com.sbaldasso.mybank.auth.security.jwt.JWTFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -20,12 +21,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @EnableWebSecurity
-@RequiredArgsConstructor
 @EnableMethodSecurity
 public class SecurityConfiguration {
 
     private final JWTFilter jwtAuthFilter;
     private final CustomUserDetailsService userService;
+
+    // Injeção via construtor
+    @Autowired
+    public SecurityConfiguration(JWTFilter jwtAuthFilter, CustomUserDetailsService userService) {
+        this.jwtAuthFilter = jwtAuthFilter;
+        this.userService = userService;
+    }
+
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -34,7 +42,7 @@ public class SecurityConfiguration {
                     .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     .authorizeHttpRequests(authorize -> authorize
                             .requestMatchers("/api/v1/auth/register").permitAll()
-                            .requestMatchers("/api/v1/auth/login").hasAnyRole("USER", "ADMIN")
+                            .requestMatchers("/api/v1/auth/login").permitAll()
                             .anyRequest().authenticated()
                     )
                     .cors(AbstractHttpConfigurer::disable)

@@ -123,21 +123,4 @@ public class AuthControllerTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(userAuthDTO.getToken(), response.getBody());
     }
-
-//    @Test
-//    @DisplayName("POST /login - Invalid Credentials")
-//    void login_whenCredentialsAreInvalid_shouldReturnUnauthorized() {
-//        // --- GIVEN ---
-//        // Mock the authService to throw a BadCredentialsException, which is common for auth failures.
-//        given(authService.authenticate(any(UserLoginDTO.class)))
-//                .willThrow(new BadCredentialsException("Invalid credentials"));
-//
-//        // --- WHEN ---
-//        ResponseEntity<?> response = authController.login(userLoginDTO);
-//
-//        // --- THEN ---
-//        assertNotNull(response);
-//        assertEquals(HttpStatus.UNAUTHORIZED, response.getStatusCode());
-//        assertEquals("Invalid credentials", response.getBody());
-//    }
 }

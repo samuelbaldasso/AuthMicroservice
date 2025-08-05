@@ -6,6 +6,7 @@ import com.sbaldasso.mybank.auth.dto.UserLoginDTO;
 import com.sbaldasso.mybank.auth.repositories.UserRepository;
 import com.sbaldasso.mybank.auth.services.AuthService;
 import com.sbaldasso.mybank.auth.security.jwt.JWTTokenGenerator;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,9 @@ public class AuthController {
     private JWTTokenGenerator jwtTokenUtil;
 
     @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody UserDTO user) {
+    public ResponseEntity<String> registerUser(@Valid @RequestBody UserDTO user) {
         if (userRepository.findByEmail(user.getEmail()).isPresent()) {
-            return new ResponseEntity<>("Username is already taken", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Email is already taken", HttpStatus.BAD_REQUEST);
         }
 
         UserAuthDTO userAuthDTO = authService.register(user);
@@ -38,7 +39,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserLoginDTO user) {
+    public ResponseEntity<String> login(@Valid @RequestBody UserLoginDTO user) {
         UserAuthDTO authentication = authService.authenticate(user);
         return ResponseEntity.ok(authentication.getToken());
     }
