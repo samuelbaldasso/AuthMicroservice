@@ -8,7 +8,7 @@ This project is the authentication and authorization microservice extracted from
 * Maven
 * Spring Boot
 * Spring Security
-* JWT Tokens
+* JWT Token
 * Docker
 
 ## 📁 Project Structure
