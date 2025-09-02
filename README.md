@@ -10,6 +10,7 @@ This project is the authentication and authorization microservice extracted from
 * Spring Security
 * JWT Token
 * Docker
+* JUnit5 / Mockito
 
 ## 📁 Project Structure
 
